@@ -1,3 +1,29 @@
 body {
     background-color: #37383b;
 }
+.word-container {
+    text-align: center;
+    margin-top: 4%;
+}
+.word-squares {
+    margin-bottom: .2em;
+    text-align: center;
+    vertical-align: top;
+    width: 4em;
+    height: 4em;
+    display: inline-block;
+    border: 2px solid rgba(0, 0, 0, 0.658);
+}
+input {
+    margin-top: 2%;
+    font-family: sans-serif;
+    font-size: 3em;
+    outline: none;
+    background-color: #37383b;
+    border-style: none;
+    width: 1em;
+    height: 1.2em;
+    text-align: center;
+    color: white;
+    caret-color: transparent;
+}
