@@ -4,15 +4,18 @@ var word = "iodin"
 var answer = ["i","o","d","i","n"]
 var userAnswer = []
 
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown',keyFunction)
+function keyFunction(e) {
+    var square = document.getElementById('row' + rowNumber).getElementsByClassName('userinput')
 
     if(e.keyCode > 64 && e.keyCode < 91) {
         if(userAnswer.length == 5) {
             return
         }
-        document.getElementById('row' + rowNumber).getElementsByClassName('userinput')[number].value = e.key
+        square[number].value = e.key
         number = number + 1
         userAnswer.push(e.key)
+        console.log(userAnswer)
     }
 
     if(e.key.match('Backspace')) {
@@ -20,14 +23,14 @@ document.addEventListener('keydown', function(e) {
         if(number == -1) {
             number = 0
         }
-        document.getElementById('row' + rowNumber).getElementsByClassName('userinput')[number].value = ''
+        square[number].value = ''
         userAnswer.splice(-1,1)
     }
 
     if(e.key.match('Enter')) {
         checkAns()
     }
-});
+}
 
 function checkAns() {
     var square = document.getElementById('row' + rowNumber).querySelectorAll('.word-squares')
@@ -36,25 +39,27 @@ function checkAns() {
         return
     }
 
+    if(answer.toString() === userAnswer.toString().toLowerCase()) {
+        document.removeEventListener('keydown', keyFunction)
+    }
+
     for(let i = 0; i < answer.length; i++) {
-        if(userAnswer[i] == answer[i]) {
+        if(userAnswer[i].toLowerCase() == answer[i]) {
             answer[i] = " "
             square[i].style.backgroundColor = "green"
         }
     }
-    console.log("before yellow " + answer)
 
     for(let i = 0; i < answer.length; i++) {
         if(answer.includes(userAnswer[i])) {
             var a = answer.indexOf(userAnswer[i])
             if(square[i].style.backgroundColor != "green") {
                 answer[a] = " "
-                square[i].style.backgroundColor = "yellow"   
+                square[i].style.backgroundColor = '#ebe117' 
             }
         }
     }
     
-    console.log("after yellow " + answer)
     userAnswer = []
     answer = []
     number = 0
